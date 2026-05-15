@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YUR51 WA BOT</title>
+
+<style>
+body{
+    background:#000;
+    color:#00ff41;
+    font-family:Courier New, monospace;
+    margin:0;
+    padding:15px;
+}
+
+.container{
+    border:2px solid #00ff41;
+    border-radius:15px;
+    padding:20px;
+    background:#050505;
+    box-shadow:0 0 20px #00ff41;
+}
+
+.title{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:5px;
+    text-shadow:0 0 10px #00ff41;
+}
+
+.sub{
+    text-align:center;
+    color:#888;
+    margin-bottom:20px;
+}
+
+.card{
+    border:1px solid #00ff41;
+    padding:15px;
+    margin-top:15px;
+    border-radius:10px;
+    background:#0a0a0a;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#00ff41;
+    color:#000;
+    font-weight:bold;
+    margin-top:10px;
+    cursor:pointer;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#fff;
+}
+
+.log{
+    background:#000;
+    border:1px solid #00ff41;
+    height:200px;
+    overflow:auto;
+    padding:10px;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.status{
+    color:lime;
+    font-weight:bold;
+}
+
+.qr{
+    width:220px;
+    height:220px;
+    border:2px dashed #00ff41;
+    margin:20px auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    background:#000;
+    border:1px solid #00ff41;
+    color:#00ff41;
+    border-radius:10px;
+    margin-top:10px;
+    box-sizing:border-box;
+}
+
+.blink{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+☣️ YUR51 WA BOT ☣️
+</div>
+
+<div class="sub">
+NODE.JS + BAILEYS MOBILE PANEL
+</div>
+
+<div class="card">
+STATUS :
+<span class="status blink" id="status">
+DISCONNECTED
+</span>
+</div>
+
+<div class="card">
+
+<label>Nomor WhatsApp:</label>
+
+<input type="number"
+id="number"
+placeholder="628xxxxxxxx">
+
+<button onclick="connectBot()">
+CONNECT BOT ⚡
+</button>
+
+</div>
+
+<div class="card">
+
+<h3 style="text-align:center;">
+PAIRING QR
+</h3>
+
+<div class="qr" id="qr">
+QR WILL APPEAR HERE
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+TERMINAL LOG
+</h3>
+
+<div class="log" id="log">
+[SYSTEM] Waiting connection...
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function addLog(text){
+
+    const log = document.getElementById("log");
+
+    log.innerHTML += "<br>> " + text;
+
+    log.scrollTop = log.scrollHeight;
+}
+
+function connectBot(){
+
+    const num =
+    document.getElementById("number").value;
+
+    if(num.length < 10){
+
+        alert("Masukkan nomor yang benar!");
+        return;
+    }
+
+    addLog("Initializing NodeJS Engine...");
+    addLog("Connecting to Baileys Server...");
+    addLog("Generating WhatsApp Session...");
+
+    document.getElementById("status")
+    .innerText = "CONNECTING...";
+
+    setTimeout(()=>{
+
+        addLog("Waiting QR Pairing...");
+        addLog("Scan QR menggunakan WhatsApp.");
+
+        document.getElementById("qr")
+        .innerHTML = `
+        <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=YUR51-BOT"
+        width="220">
+        `;
+
+    },2000);
+
+    setTimeout(()=>{
+
+        addLog("Session Connected!");
+        addLog("BOT ONLINE ✅");
+
+        document.getElementById("status")
+        .innerText = "CONNECTED";
+
+    },5000);
+
+}
+
+</script>
+
+</body>
+  </html>
